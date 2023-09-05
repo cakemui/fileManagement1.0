@@ -19,6 +19,12 @@ import springfox.documentation.spring.web.plugins.Docket;
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
 
+/**
+ * 小月
+ * 2023/9/4/14点10分
+ *
+ * swagger配置
+ */
 @Configuration
 @EnableOpenApi
 @Component

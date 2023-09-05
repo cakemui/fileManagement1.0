@@ -2,6 +2,9 @@ package com.example.demo.common;
 
 import java.util.UUID;
 
+/**
+ * UUID生成类
+ */
 public class UUIDUtils {
 
     public static String getUUID(){

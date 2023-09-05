@@ -1,5 +1,6 @@
 package com.example.demo.common;
 
+import com.example.demo.constant.ResultConstant;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -21,7 +22,7 @@ public class ResultBean<T> {
     private T data;
 
     public ResultBean (){
-        code = 500;
+        code = ResultConstant.USER_ERROR_MSG_CODE;
         smg = "返回值未被赋值";
     }
 }

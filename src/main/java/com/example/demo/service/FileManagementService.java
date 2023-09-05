@@ -5,6 +5,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+/**
+ * 小月
+ * 2023/9/4/14点07分
+ *
+ * 文件管理业务接口
+ */
 public interface FileManagementService {
 
     ResultBean<String> upLoadFile(MultipartFile file);

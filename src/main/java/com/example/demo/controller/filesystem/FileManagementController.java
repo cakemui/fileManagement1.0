@@ -35,14 +35,18 @@ public class FileManagementController {
     @ApiOperation(value = "文件上传接口", notes = "文件上传接口")
     public ResultBean fileUpload(@RequestPart("file") MultipartFile file){
         Assert.notNull(file, "file不可为空！");
+        logger.info("====================调用接口====================");
+        logger.info("文件上传接口：");
         ResultBean resultBean = fileManagementService.upLoadFile(file);
         return resultBean;
     }
 
-    @GetMapping(value = "/fileDownload")
-    @ApiOperation(value = "文件下载接口", notes = "文件下载接口", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResultBean<MultipartFile> fileDownload(@RequestParam String fileId){
+    @GetMapping(value = "/fileDownloadByFileId")
+    @ApiOperation(value = "根据文件ID下载文件接口", notes = "根据文件ID下载文件接口", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResultBean<MultipartFile> fileDownloadByFileId(@RequestParam String fileId){
         Assert.notNull(fileId, "fileId不可为空！");
+        logger.info("====================调用接口====================");
+        logger.info("根据文件ID下载文件接口：");
         ResultBean resultBean = fileManagementService.downLoadFile(fileId);
         return resultBean;
     }
@@ -51,14 +55,18 @@ public class FileManagementController {
     @ApiOperation(value = "文件批量上传接口", notes = "文件批量上传接口")
     public ResultBean filesUpload(@RequestPart("files") MultipartFile[] files){
         Assert.notNull(files, "file不可为空！");
+        logger.info("====================调用接口====================");
+        logger.info("文件批量上传接口：");
         ResultBean resultBean = fileManagementService.upLoadFiles(files);
         return resultBean;
     }
 
-    @PostMapping(value = "/filesSelect")
-    @ApiOperation(value = "文件查询", notes = "文件查询", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResultBean filesSelect(@RequestBody String id){
+    @PostMapping(value = "/filesSelectByPage")
+    @ApiOperation(value = "分页查询已上传文件接口", notes = "分页查询已上传文件接口", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResultBean filesSelectByPage(@RequestBody String id){
         Assert.notNull(id, "id不可为空！");
+        logger.info("====================调用接口====================");
+        logger.info("分页查询已上传文件接口：");
         ResultBean resultBean = fileManagementService.filesSelect(id);
         return resultBean;
     }

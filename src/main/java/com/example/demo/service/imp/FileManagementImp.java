@@ -13,6 +13,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 小月
+ * 2023/9/4/14点07分
+ *
+ * 文件管理类实现
+ */
 @Service("FileManagementService")
 public class FileManagementImp implements FileManagementService {
 
@@ -24,8 +30,7 @@ public class FileManagementImp implements FileManagementService {
         String fileId = "";
 
         try {
-            resultBean.setSmg(ResultConstant.USER_SUCCESS_MSG);
-            resultBean.setCode(ResultConstant.USER_SUCCESS_MSG_CODE);
+            logger.info("正在上传文件:" + file.getOriginalFilename());
 
             //上传文件名称
             String fileName = file.getOriginalFilename();
@@ -47,7 +52,9 @@ public class FileManagementImp implements FileManagementService {
                 fileId = UUIDUtils.getUUID();
             }
 
-
+            logger.info("上传文件成功！");
+            resultBean.setSmg(ResultConstant.USER_SUCCESS_MSG);
+            resultBean.setCode(ResultConstant.USER_SUCCESS_MSG_CODE);
 
             resultBean.setData(fileId);
         }catch (Exception e){
@@ -91,7 +98,6 @@ public class FileManagementImp implements FileManagementService {
     @Override
     public ResultBean<String> downLoadFile(String FileId) {
         ResultBean<String> resultBean = new ResultBean<>();
-
         try {
             resultBean.setSmg(ResultConstant.USER_SUCCESS_MSG);
             resultBean.setCode(ResultConstant.USER_SUCCESS_MSG_CODE);

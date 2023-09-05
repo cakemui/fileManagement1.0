@@ -18,6 +18,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 小月
+ * 2023/9/4/14点10分
+ *
+ * Druid配置
+ */
 @Configuration
 public class DruidDataSourceConfig {
 
