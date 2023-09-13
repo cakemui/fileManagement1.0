@@ -72,7 +72,7 @@ public class DruidDataSourceConfig {
     public FilterRegistrationBean webStatFilter(){
         Map<String,String> initParams = new HashMap<>();
         // 这些不进行统计
-        initParams.put("exclusions","*.js,*.css,/druid/*");
+        initParams.put("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
 
         FilterRegistrationBean bean = new FilterRegistrationBean();
         bean.setFilter(new WebStatFilter());
