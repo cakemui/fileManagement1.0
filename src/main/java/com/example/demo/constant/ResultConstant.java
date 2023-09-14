@@ -1,5 +1,8 @@
 package com.example.demo.constant;
 
+/**
+ * 返回值静态常量
+ */
 public class ResultConstant {
 
     public static final int USER_ERROR_MSG_CODE = 500;

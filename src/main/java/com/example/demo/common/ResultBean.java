@@ -5,6 +5,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+/**
+ * 小月
+ * 2023.9.3.16点29分
+ *
+ * 返回值类
+ */
 @Data
 @ApiModel(value = "返回结果")
 public class ResultBean<T> {
