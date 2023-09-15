@@ -11,11 +11,11 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @MapperScan("mapper")
-public class Demo1Application {
+public class XYSmartAssistantsApplication {
 
-    private static final Logger logger = LoggerFactory.getLogger(Demo1Application.class);
+    private static final Logger logger = LoggerFactory.getLogger(XYSmartAssistantsApplication.class);
     public static void main(String[] args) {
-        SpringApplication.run(Demo1Application.class, args);
+        SpringApplication.run(XYSmartAssistantsApplication.class, args);
         logger.info("启动成功!");
     }
 
