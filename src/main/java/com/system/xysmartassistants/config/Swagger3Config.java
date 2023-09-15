@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.system.xysmartassistants.config;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

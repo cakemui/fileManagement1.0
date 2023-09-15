@@ -1,6 +1,6 @@
-package com.example.demo.service;
+package com.system.xysmartassistants.service;
 
-import com.example.demo.common.ResultBean;
+import com.system.xysmartassistants.common.ResultBean;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

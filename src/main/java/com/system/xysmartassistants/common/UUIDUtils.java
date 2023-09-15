@@ -1,4 +1,4 @@
-package com.example.demo.common;
+package com.system.xysmartassistants.common;
 
 import java.util.UUID;
 

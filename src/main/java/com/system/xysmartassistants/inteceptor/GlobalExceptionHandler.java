@@ -1,6 +1,6 @@
-package com.example.demo.inteceptor;
+package com.system.xysmartassistants.inteceptor;
 
-import com.example.demo.common.ResultBean;
+import com.system.xysmartassistants.common.ResultBean;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;

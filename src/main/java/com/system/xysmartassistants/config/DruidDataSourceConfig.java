@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.system.xysmartassistants.config;
 
 import com.alibaba.druid.filter.config.ConfigTools;
 import com.alibaba.druid.pool.DruidDataSource;

@@ -1,4 +1,4 @@
-package com.example.demo.constant;
+package com.system.xysmartassistants.constant;
 
 /**
  * 返回值静态常量

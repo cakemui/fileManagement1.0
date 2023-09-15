@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.system.xysmartassistants;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;

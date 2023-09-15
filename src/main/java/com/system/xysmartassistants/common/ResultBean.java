@@ -1,6 +1,6 @@
-package com.example.demo.common;
+package com.system.xysmartassistants.common;
 
-import com.example.demo.constant.ResultConstant;
+import com.system.xysmartassistants.constant.ResultConstant;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

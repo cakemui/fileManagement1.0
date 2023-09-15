@@ -1,9 +1,9 @@
-package com.example.demo.service.imp;
+package com.system.xysmartassistants.service.imp;
 
-import com.example.demo.common.ResultBean;
-import com.example.demo.common.UUIDUtils;
-import com.example.demo.constant.ResultConstant;
-import com.example.demo.service.FileManagementService;
+import com.system.xysmartassistants.common.ResultBean;
+import com.system.xysmartassistants.common.UUIDUtils;
+import com.system.xysmartassistants.constant.ResultConstant;
+import com.system.xysmartassistants.service.FileManagementService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
