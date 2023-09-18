@@ -1,4 +1,4 @@
-package com.system.xysmartassistants;
+package com.system.xysmartassistants.utils;
 
 import com.alibaba.druid.filter.config.ConfigTools;
 

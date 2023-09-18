@@ -3,14 +3,18 @@ package com.system.xysmartassistants.service.imp;
 import com.system.xysmartassistants.common.ResultBean;
 import com.system.xysmartassistants.common.UUIDUtils;
 import com.system.xysmartassistants.constant.ResultConstant;
+import com.system.xysmartassistants.dao.filesystem.UserFileManagementDao;
+import com.system.xysmartassistants.domain.model.UserFileManagement;
 import com.system.xysmartassistants.service.FileManagementService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,6 +27,9 @@ import java.util.List;
 public class FileManagementImp implements FileManagementService {
 
     private final Logger logger = LoggerFactory.getLogger(FileManagementService.class);
+
+    @Resource
+    UserFileManagementDao userFileManagementDao;
 
     @Override
     public ResultBean<String> upLoadFile(MultipartFile file) {
@@ -51,6 +58,17 @@ public class FileManagementImp implements FileManagementService {
 
                 fileId = UUIDUtils.getUUID();
             }
+
+            //将数据插入数据库
+            UserFileManagement userFileManagement = new UserFileManagement();
+            userFileManagement.setFileId(fileId);
+            userFileManagement.setFileName(fileName);
+            userFileManagement.setFileUrl("XXXX");
+
+            userFileManagement.setCreatorDate(new Date());
+            
+            userFileManagement.setEditorDate(new Date());
+            userFileManagementDao.insert(userFileManagement);
 
             logger.info("上传文件成功！");
             resultBean.setSmg(ResultConstant.USER_SUCCESS_MSG);

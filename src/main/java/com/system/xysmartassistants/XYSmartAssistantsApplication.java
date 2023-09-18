@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 
 
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
-@MapperScan("mapper")
+@MapperScan("com.system.xysmartassistants.dao")
 public class XYSmartAssistantsApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(XYSmartAssistantsApplication.class);
