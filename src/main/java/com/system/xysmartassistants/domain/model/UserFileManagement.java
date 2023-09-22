@@ -83,5 +83,10 @@ public class UserFileManagement implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date editorDate;
 
+    /**
+     * 是否删除(0:正常,1:删除)
+     */
+    @ApiModelProperty(value = "is_delete")
+    private Integer isDelete;
 
 }
