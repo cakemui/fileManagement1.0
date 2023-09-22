@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.xysmartassistants.dao.filesystem.UserBusinessServiceDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.system.xysmartassistants.domain.model.UserBusinessSevice">
+        <id column="user_id" property="userId" />
+        <result column="user_account" property="userAccount" />
+        <result column="user_name" property="userName" />
+        <result column="user_passwd" property="userPasswd" />
+        <result column="user_type" property="userType" />
+        <result column="creator_id" property="creatorId" />
+        <result column="creator_account" property="creatorAccount" />
+        <result column="creator_date" property="creatorDate" />
+        <result column="editor_id" property="editorId" />
+        <result column="editor_account" property="editorAccount" />
+        <result column="editor_date" property="editorDate" />
+        <result column="is_delete" property="isDelete" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        user_id, user_account, user_name, user_passwd, user_type, creator_id, creator_account, creator_date, editor_id, editor_account, editor_date, is_delete
+    </sql>
+
+    <select id="selectByUserName" resultMap="BaseResultMap">
+        select user_account, user_name, user_passwd, user_type, creator_id, creator_account, creator_date, editor_id, editor_account, editor_date, is_delete
+        from user_business_service
+        where user_name = #{userName} and is_delete = 0
+    </select>
+
+</mapper>
