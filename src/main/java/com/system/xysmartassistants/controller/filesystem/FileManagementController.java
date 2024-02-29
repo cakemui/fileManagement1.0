@@ -68,7 +68,7 @@ public class FileManagementController {
     }
 
     @PostMapping(value = "/queryFilesByPage")
-    @ApiOperation(value = "分页查询已上传文件接口", notes = "分页查询已上传文件接口", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "分页查询已上传文件接口", notes = "分页查询已上传文件接口")
     public ResultBean<PageInfo<UserFileManagement>> queryFilesByPage(@RequestBody UserFileManagement userFileManagement){
         Assert.notNull(userFileManagement, "id不可为空！");
         logger.info("====================调用接口====================");
