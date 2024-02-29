@@ -56,9 +56,9 @@ public class CodeGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-//        dsc.setUrl("jdbc:mysql://cn-hk-bgp-11.openfrp.top:24143/systemService?characterEncoding=utf8&allowPublicKeyRetrieval=true&serverTimezone=UTC&useSSL=false");
+        dsc.setUrl("jdbc:mysql://cn-hk-bgp-11.openfrp.top:24143/systemService?characterEncoding=utf8&allowPublicKeyRetrieval=true&serverTimezone=UTC&useSSL=false");
         //uat数据库地址
-        dsc.setUrl("jdbc:mysql://192.168.23.135:3306/systemService?characterEncoding=utf8&allowPublicKeyRetrieval=true&serverTimezone=UTC&useSSL=false");
+//        dsc.setUrl("jdbc:mysql://192.168.23.135:3306/systemService?characterEncoding=utf8&allowPublicKeyRetrieval=true&serverTimezone=UTC&useSSL=false");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("filesystem");
         dsc.setPassword("kyfYtdAQ7HwsynD3p0Y717AQFmB7Exdi");

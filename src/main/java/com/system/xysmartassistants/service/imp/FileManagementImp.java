@@ -64,6 +64,7 @@ public class FileManagementImp implements FileManagementService {
             userFileManagement.setFileId(fileId);
             userFileManagement.setFileName(fileName);
             userFileManagement.setFileUrl("XXXX");
+            userFileManagement.setIsDelete(0);
 
             userFileManagement.setCreatorDate(new Date());
             

@@ -126,23 +126,6 @@
             <artifactId>thymeleaf-extras-java8time</artifactId>
         </dependency>
 
-        <!--spring security-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <!-- spring session redis -->
-        <dependency>
-            <groupId>org.springframework.session</groupId>
-            <artifactId>spring-session-data-redis</artifactId>
-        </dependency>
-        <!--引入JWT-->
-        <dependency>
-            <groupId>com.auth0</groupId>
-            <artifactId>java-jwt</artifactId>
-            <version>4.3.0</version>
-        </dependency>
-
     </dependencies>
 
 
