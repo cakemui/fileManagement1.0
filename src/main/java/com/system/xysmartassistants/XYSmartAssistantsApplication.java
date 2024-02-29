@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @MapperScan("com.system.xysmartassistants.dao")
-@ComponentScan("com.system.xysmartassistants.config")
+@ComponentScan(basePackages = {"com.system.xysmartassistants.*"})
 public class XYSmartAssistantsApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(XYSmartAssistantsApplication.class);
