@@ -1,6 +1,9 @@
 package com.system.xysmartassistants.controller.filesystem;
 
+import com.github.pagehelper.PageInfo;
 import com.system.xysmartassistants.common.ResultBean;
+import com.system.xysmartassistants.dao.filesystem.UserFileManagementDao;
+import com.system.xysmartassistants.domain.model.UserFileManagement;
 import com.system.xysmartassistants.service.FileManagementService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,6 +41,7 @@ public class FileManagementController {
         logger.info("====================调用接口====================");
         logger.info("文件上传接口：");
         ResultBean resultBean = fileManagementService.upLoadFile(file);
+        logger.info("====================调用结束====================");
         return resultBean;
     }
 
@@ -48,6 +52,7 @@ public class FileManagementController {
         logger.info("====================调用接口====================");
         logger.info("根据文件ID下载文件接口：");
         ResultBean resultBean = fileManagementService.downLoadFile(fileId);
+        logger.info("====================调用结束====================");
         return resultBean;
     }
 
@@ -58,16 +63,18 @@ public class FileManagementController {
         logger.info("====================调用接口====================");
         logger.info("文件批量上传接口：");
         ResultBean resultBean = fileManagementService.upLoadFiles(files);
+        logger.info("====================调用结束====================");
         return resultBean;
     }
 
-    @PostMapping(value = "/filesSelectByPage")
+    @PostMapping(value = "/queryFilesByPage")
     @ApiOperation(value = "分页查询已上传文件接口", notes = "分页查询已上传文件接口", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResultBean filesSelectByPage(@RequestBody String id){
-        Assert.notNull(id, "id不可为空！");
+    public ResultBean<PageInfo<UserFileManagement>> queryFilesByPage(@RequestBody UserFileManagement userFileManagement){
+        Assert.notNull(userFileManagement, "id不可为空！");
         logger.info("====================调用接口====================");
         logger.info("分页查询已上传文件接口：");
-        ResultBean resultBean = fileManagementService.filesSelect(id);
+        ResultBean resultBean = fileManagementService.queryFilesByPage(userFileManagement);
+        logger.info("====================调用结束====================");
         return resultBean;
     }
 }

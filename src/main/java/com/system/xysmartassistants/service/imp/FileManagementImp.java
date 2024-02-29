@@ -1,5 +1,8 @@
 package com.system.xysmartassistants.service.imp;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.system.xysmartassistants.common.ResultBean;
 import com.system.xysmartassistants.common.UUIDUtils;
 import com.system.xysmartassistants.constant.ResultConstant;
@@ -121,6 +124,7 @@ public class FileManagementImp implements FileManagementService {
             resultBean.setSmg(ResultConstant.USER_SUCCESS_MSG);
             resultBean.setCode(ResultConstant.USER_SUCCESS_MSG_CODE);
 
+            //逻辑未实现
         }catch (Exception e){
             logger.error("文件下载失败！", e);
             resultBean.setSmg(ResultConstant.USER_ERROR_MSG);
@@ -130,14 +134,41 @@ public class FileManagementImp implements FileManagementService {
     }
 
     @Override
-    public ResultBean<String> filesSelect(String id) {
+    public ResultBean<String> queryFileById(String id) {
         ResultBean<String> resultBean = new ResultBean<>();
 
         try {
             resultBean.setSmg(ResultConstant.USER_SUCCESS_MSG);
             resultBean.setCode(ResultConstant.USER_SUCCESS_MSG_CODE);
+
+            //逻辑未实现
 //            resultBean.setData();
         }catch (Exception e){
+            logger.error("查询失败！", e);
+            resultBean.setSmg(ResultConstant.USER_ERROR_MSG);
+            resultBean.setCode(ResultConstant.USER_ERROR_MSG_CODE);
+        }
+
+        return resultBean;
+    }
+
+    @Override
+    public ResultBean<PageInfo<UserFileManagement>> queryFilesByPage(UserFileManagement userFileManagement) {
+        ResultBean<PageInfo<UserFileManagement>> resultBean = new ResultBean<>();
+
+        try {
+            //设定初始分页
+            PageHelper.startPage(userFileManagement.getPage(), userFileManagement.getPageSize());
+            //封装查询结果为PageInfo类型
+            Page<UserFileManagement> page = this.userFileManagementDao.selectAllByPage(userFileManagement);
+            PageInfo<UserFileManagement> pageInfo = new PageInfo<>(page);
+
+            //配置返回值
+            resultBean.setData(pageInfo);
+            resultBean.setSmg(ResultConstant.USER_SUCCESS_MSG);
+            resultBean.setCode(ResultConstant.USER_SUCCESS_MSG_CODE);
+        }
+        catch (Exception e){
             logger.error("查询失败！", e);
             resultBean.setSmg(ResultConstant.USER_ERROR_MSG);
             resultBean.setCode(ResultConstant.USER_ERROR_MSG_CODE);

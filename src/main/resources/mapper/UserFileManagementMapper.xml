@@ -21,5 +21,41 @@
         file_id, file_name, file_url, creator_id, creator_account, creator_date, editor_id, editor_account, editor_date, is_delete
     </sql>
 
+    <select id="selectAllByPage" resultType="com.system.xysmartassistants.domain.model.UserFileManagement">
+        select
+            file_id, file_name, file_url, creator_id, creator_account, creator_date, editor_id, editor_account, editor_date
+        from user_file_management
+        where
+            is_delete = 0
+            <if test="fileId != null and fileId != ''">
+                and file_id = #{fileId}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="fileUrl != null and fileUrl != ''">
+                and file_url = #{fileUrl}
+            </if>
+            <if test="creatorId != null and creatorId != ''">
+                and creator_id = #{creatorId}
+            </if>
+            <if test="creatorAccount != null and creatorAccount != ''">
+                and creator_account = #{creatorAccount}
+            </if>
+            <if test="creatorDate != null and creatorDate != ''">
+                and creator_date = #{creatorDate}
+            </if>
+            <if test="editorId != null and editorId != ''">
+                and editor_id = #{editorId}
+            </if>
+            <if test="editorAccount != null and editorAccount != ''">
+                and editor_account = #{editorAccount}
+            </if>
+            <if test="editorDate != null and editorDate != ''">
+                and editor_date = #{editorDate}
+            </if>
+    </select>
+
+
 </mapper>
 

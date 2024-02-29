@@ -1,6 +1,8 @@
 package com.system.xysmartassistants.service;
 
+import com.github.pagehelper.PageInfo;
 import com.system.xysmartassistants.common.ResultBean;
+import com.system.xysmartassistants.domain.model.UserFileManagement;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -19,5 +21,7 @@ public interface FileManagementService {
 
     ResultBean<List<String>> upLoadFiles(MultipartFile[] files);
 
-    ResultBean<String> filesSelect(String id);
+    ResultBean<String> queryFileById(String id);
+
+    ResultBean<PageInfo<UserFileManagement>> queryFilesByPage(UserFileManagement userFileManagement);
 }
