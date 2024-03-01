@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 /**
@@ -34,6 +36,11 @@ public class FileManagementController {
     @Resource
     FileManagementService fileManagementService;
 
+    /**
+     * 文件上传接口
+     * @param file 文件
+     * @return
+     */
     @PostMapping(value = "/fileUpload")
     @ApiOperation(value = "文件上传接口", notes = "文件上传接口")
     public ResultBean fileUpload(@RequestPart("file") MultipartFile file){
@@ -45,18 +52,27 @@ public class FileManagementController {
         return resultBean;
     }
 
+    /**
+     * 通过id下载文件接口
+     * @param fileId 文件id
+     * @return
+     */
     @GetMapping(value = "/fileDownloadByFileId")
     @ApiOperation(value = "根据文件ID下载文件接口", notes = "根据文件ID下载文件接口", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResultBean<MultipartFile> fileDownloadByFileId(@RequestParam String fileId){
+    public void fileDownloadByFileId(@RequestParam String fileId, HttpServletRequest request, HttpServletResponse response){
         Assert.notNull(fileId, "fileId不可为空！");
         logger.info("====================调用接口====================");
         logger.info("根据文件ID下载文件接口：");
-        ResultBean resultBean = fileManagementService.downLoadFile(fileId);
+        fileManagementService.downLoadFile(fileId, request, response);
         logger.info("====================调用结束====================");
-        return resultBean;
     }
 
-    @PostMapping(value = "/filesUpload")
+    /**
+     * 文件批量上传接口
+     * @param files 多个文件
+     * @return
+     */
+    @PostMapping(value = "/filesUploads")
     @ApiOperation(value = "文件批量上传接口", notes = "文件批量上传接口")
     public ResultBean filesUpload(@RequestPart("files") MultipartFile[] files){
         Assert.notNull(files, "file不可为空！");
@@ -67,6 +83,11 @@ public class FileManagementController {
         return resultBean;
     }
 
+    /**
+     *分页查询已上传文件接口
+     * @param userFileManagement 用户文件信息对象
+     * @return
+     */
     @PostMapping(value = "/queryFilesByPage")
     @ApiOperation(value = "分页查询已上传文件接口", notes = "分页查询已上传文件接口")
     public ResultBean<PageInfo<UserFileManagement>> queryFilesByPage(@RequestBody UserFileManagement userFileManagement){

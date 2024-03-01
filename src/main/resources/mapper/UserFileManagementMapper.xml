@@ -4,7 +4,7 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.system.xysmartassistants.domain.model.UserFileManagement">
-        <result column="file_id" property="fileId" />
+        <result column="file_id" property="fileId" jdbcType = "VARCHAR"/>
         <result column="file_name" property="fileName" />
         <result column="file_url" property="fileUrl" />
         <result column="creator_id" property="creatorId" />
@@ -21,6 +21,7 @@
         file_id, file_name, file_url, creator_id, creator_account, creator_date, editor_id, editor_account, editor_date, is_delete
     </sql>
 
+    <!--条件查询-->
     <select id="selectAllByPage" resultType="com.system.xysmartassistants.domain.model.UserFileManagement">
         select
             file_id, file_name, file_url, creator_id, creator_account, creator_date, editor_id, editor_account, editor_date
@@ -54,6 +55,17 @@
             <if test="editorDate != null and editorDate != ''">
                 and editor_date = #{editorDate}
             </if>
+    </select>
+    <!--通过Id查询-->
+    <select id="selectAllByFileId" resultType="com.system.xysmartassistants.domain.model.UserFileManagement">
+        select
+            file_id, file_name, file_url, creator_id, creator_account, creator_date, editor_id, editor_account, editor_date
+        from user_file_management
+        where
+            is_delete = 0
+        <if test="fileId != null and fileId != ''">
+            and file_id = #{fileId}
+        </if>
     </select>
 
 

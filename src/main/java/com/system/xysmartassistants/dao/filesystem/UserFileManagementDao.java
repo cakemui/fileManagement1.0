@@ -3,6 +3,7 @@ package com.system.xysmartassistants.dao.filesystem;
 import com.github.pagehelper.Page;
 import com.system.xysmartassistants.domain.model.UserFileManagement;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -14,5 +15,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface UserFileManagementDao extends BaseMapper<UserFileManagement> {
 
-    Page<UserFileManagement> selectAllByPage(UserFileManagement userFileManagement);
+    Page<UserFileManagement> selectAllByPage(@Param("userFileManagement") UserFileManagement userFileManagement);
+
+    UserFileManagement selectAllByFileId(@Param("fileId")String fileId);
 }

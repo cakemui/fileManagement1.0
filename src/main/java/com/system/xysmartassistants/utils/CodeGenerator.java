@@ -16,6 +16,9 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * 代码生成器
+ */
 public class CodeGenerator {
 
     public static String scanner(String tip) {

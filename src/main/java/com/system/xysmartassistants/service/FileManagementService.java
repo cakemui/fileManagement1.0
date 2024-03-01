@@ -5,6 +5,8 @@ import com.system.xysmartassistants.common.ResultBean;
 import com.system.xysmartassistants.domain.model.UserFileManagement;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -17,7 +19,7 @@ public interface FileManagementService {
 
     ResultBean<String> upLoadFile(MultipartFile file);
 
-    ResultBean<String> downLoadFile(String fileId);
+    void downLoadFile(String fileId, HttpServletRequest request, HttpServletResponse response);
 
     ResultBean<List<String>> upLoadFiles(MultipartFile[] files);
 

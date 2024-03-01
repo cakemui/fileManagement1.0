@@ -1,4 +1,4 @@
-package com.system.xysmartassistants.service.imp;
+package com.system.xysmartassistants.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -9,12 +9,15 @@ import com.system.xysmartassistants.constant.ResultConstant;
 import com.system.xysmartassistants.dao.filesystem.UserFileManagementDao;
 import com.system.xysmartassistants.domain.model.UserFileManagement;
 import com.system.xysmartassistants.service.FileManagementService;
+import com.system.xysmartassistants.service.common.FileServiceAPI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,12 +30,15 @@ import java.util.List;
  * 文件管理类实现
  */
 @Service("FileManagementService")
-public class FileManagementImp implements FileManagementService {
+public class FileManagementServiceImpl implements FileManagementService {
 
     private final Logger logger = LoggerFactory.getLogger(FileManagementService.class);
 
     @Resource
     UserFileManagementDao userFileManagementDao;
+
+    @Resource
+    FileServiceAPI fileServiceAPI;
 
     @Override
     public ResultBean<String> upLoadFile(MultipartFile file) {
@@ -118,19 +124,16 @@ public class FileManagementImp implements FileManagementService {
     }
 
     @Override
-    public ResultBean<String> downLoadFile(String FileId) {
-        ResultBean<String> resultBean = new ResultBean<>();
+    public void downLoadFile(String fileId, HttpServletRequest request, HttpServletResponse response) {
+        //不需要封装返回消息，框架自带
         try {
-            resultBean.setSmg(ResultConstant.USER_SUCCESS_MSG);
-            resultBean.setCode(ResultConstant.USER_SUCCESS_MSG_CODE);
-
-            //逻辑未实现
+            //根据文件ID获取文件地址
+            UserFileManagement userFileManagement = this.userFileManagementDao.selectAllByFileId(fileId);
+            //下载文件
+            fileServiceAPI.download(userFileManagement.getFileUrl(), request, response);
         }catch (Exception e){
             logger.error("文件下载失败！", e);
-            resultBean.setSmg(ResultConstant.USER_ERROR_MSG);
-            resultBean.setCode(ResultConstant.USER_ERROR_MSG_CODE);
         }
-        return resultBean;
     }
 
     @Override
