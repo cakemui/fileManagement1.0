@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public interface FileServiceAPI {
 
-    public void upload(HttpServletRequest request, HttpServletResponse response);
+    public void upload(String fileUrl, HttpServletRequest request, HttpServletResponse response);
 
     public void download(String fileUrl, HttpServletRequest request, HttpServletResponse response) throws IOException;
 

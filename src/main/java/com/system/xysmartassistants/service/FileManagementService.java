@@ -17,13 +17,17 @@ import java.util.List;
  */
 public interface FileManagementService {
 
-    ResultBean<String> upLoadFile(MultipartFile file);
+    ResultBean<String> upLoadFile(MultipartFile file, HttpServletRequest request, HttpServletResponse response);
 
-    void downLoadFile(String fileId, HttpServletRequest request, HttpServletResponse response);
+    ResultBean<String> fileShardingUpload (MultipartFile file, HttpServletRequest request, HttpServletResponse response);
 
-    ResultBean<List<String>> upLoadFiles(MultipartFile[] files);
+    ResultBean<List<String>> upLoadFiles (MultipartFile[] files);
 
-    ResultBean<String> queryFileById(String id);
+    void downLoadFile (String fileId, HttpServletRequest request, HttpServletResponse response);
+
+    void downLoadFileSharding (String fileId, HttpServletRequest request, HttpServletResponse response);
+
+    ResultBean<UserFileManagement> queryFileById (String id);
 
     ResultBean<PageInfo<UserFileManagement>> queryFilesByPage(UserFileManagement userFileManagement);
 }

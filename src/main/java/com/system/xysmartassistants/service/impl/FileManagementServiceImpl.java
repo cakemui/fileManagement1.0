@@ -41,7 +41,7 @@ public class FileManagementServiceImpl implements FileManagementService {
     FileServiceAPI fileServiceAPI;
 
     @Override
-    public ResultBean<String> upLoadFile(MultipartFile file) {
+    public ResultBean<String> upLoadFile(MultipartFile file, HttpServletRequest request, HttpServletResponse response) {
         ResultBean<String> resultBean = new ResultBean<>();
         String fileId = "";
 
@@ -50,10 +50,12 @@ public class FileManagementServiceImpl implements FileManagementService {
 
             //上传文件名称
             String fileName = file.getOriginalFilename();
+            //上传文件路径
+            String filePath = "";
             if (!fileName.isEmpty()){
                 String fileType = fileName.substring(fileName.lastIndexOf("."));
-                //根据文件类型生成上传文件路径
-                String filePath = "C:/files/" + fileType + "/";
+                //根据文件类型拼接上传文件路径
+                filePath = "C:/files/" + fileType + "/";
                 //生成文件对象
                 File save = new File(filePath, fileName);
                 //如果路径不存在就创建一个路径
@@ -72,11 +74,68 @@ public class FileManagementServiceImpl implements FileManagementService {
             UserFileManagement userFileManagement = new UserFileManagement();
             userFileManagement.setFileId(fileId);
             userFileManagement.setFileName(fileName);
-            userFileManagement.setFileUrl("XXXX");
+            userFileManagement.setFileUrl(filePath + fileName);
             userFileManagement.setIsDelete(0);
 
             userFileManagement.setCreatorDate(new Date());
             
+            userFileManagement.setEditorDate(new Date());
+            userFileManagementDao.insert(userFileManagement);
+
+            logger.info("上传文件成功！");
+            resultBean.setSmg(ResultConstant.USER_SUCCESS_MSG);
+            resultBean.setCode(ResultConstant.USER_SUCCESS_MSG_CODE);
+
+            resultBean.setData(fileId);
+        }catch (Exception e){
+            logger.error("文件上传失败！", e);
+            resultBean.setSmg(ResultConstant.USER_ERROR_MSG);
+            resultBean.setCode(ResultConstant.USER_ERROR_MSG_CODE);
+        }
+
+        return resultBean;
+    }
+
+    @Override
+    public ResultBean<String> fileShardingUpload(MultipartFile file, HttpServletRequest request, HttpServletResponse response) {
+        ResultBean<String> resultBean = new ResultBean<>();
+        String fileId = "";
+
+        try {
+            logger.info("正在上传文件:" + file.getOriginalFilename());
+
+            //上传文件名称
+            String fileName = file.getOriginalFilename();
+            //上传文件路径
+            String filePath = "";
+            if (!fileName.isEmpty()){
+                String fileType = fileName.substring(fileName.lastIndexOf("."));
+                //根据文件类型拼接上传文件路径
+                filePath = "C:/files/" + fileType + "/";
+                //生成文件对象
+                File save = new File(filePath, fileName);
+                //如果路径不存在就创建一个路径
+                if (!save.getParentFile().exists()) {
+                    save.getParentFile().mkdirs();
+                }
+                /**
+                 * 将上传文件保存到一个目标文件中
+                 */
+//              分片上传功能无法测试
+                fileServiceAPI.upload(filePath, request, response);
+
+                fileId = UUIDUtils.getUUID();
+            }
+
+            //将数据插入数据库
+            UserFileManagement userFileManagement = new UserFileManagement();
+            userFileManagement.setFileId(fileId);
+            userFileManagement.setFileName(fileName);
+            userFileManagement.setFileUrl(filePath + fileName);
+            userFileManagement.setIsDelete(0);
+
+            userFileManagement.setCreatorDate(new Date());
+
             userFileManagement.setEditorDate(new Date());
             userFileManagementDao.insert(userFileManagement);
 
@@ -104,8 +163,8 @@ public class FileManagementServiceImpl implements FileManagementService {
         try {
             //循环单个上传
             for(MultipartFile file : files) {
-                String fileid = this.upLoadFile(file).getData();
-                fileIds.add(fileid);
+//                String fileid = this.upLoadFile(file).getData();
+//                fileIds.add(fileid);
                 i++;
             }
 
@@ -131,21 +190,34 @@ public class FileManagementServiceImpl implements FileManagementService {
             UserFileManagement userFileManagement = this.userFileManagementDao.selectAllByFileId(fileId);
             //下载文件
             fileServiceAPI.download(userFileManagement.getFileUrl(), request, response);
+            //暂时无法测试
+//            fileServiceAPI.downloads(userFileManagement.getFileUrl());
         }catch (Exception e){
             logger.error("文件下载失败！", e);
         }
     }
 
     @Override
-    public ResultBean<String> queryFileById(String id) {
-        ResultBean<String> resultBean = new ResultBean<>();
+    public void downLoadFileSharding(String fileId, HttpServletRequest request, HttpServletResponse response) {
+        //不需要封装返回消息，框架自带
+        try {
+            //根据文件ID获取文件地址
+            UserFileManagement userFileManagement = this.userFileManagementDao.selectAllByFileId(fileId);
+            //大文件分片下载文件暂时无法测试
+            fileServiceAPI.downloads(userFileManagement.getFileUrl());
+        }catch (Exception e){
+            logger.error("文件下载失败！", e);
+        }
+    }
+
+    @Override
+    public ResultBean<UserFileManagement> queryFileById(String id) {
+        ResultBean<UserFileManagement> resultBean = new ResultBean<>();
 
         try {
             resultBean.setSmg(ResultConstant.USER_SUCCESS_MSG);
             resultBean.setCode(ResultConstant.USER_SUCCESS_MSG_CODE);
-
-            //逻辑未实现
-//            resultBean.setData();
+            resultBean.setData(this.userFileManagementDao.selectAllByFileId(id));
         }catch (Exception e){
             logger.error("查询失败！", e);
             resultBean.setSmg(ResultConstant.USER_ERROR_MSG);

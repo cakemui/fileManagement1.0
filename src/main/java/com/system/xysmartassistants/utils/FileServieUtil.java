@@ -37,10 +37,6 @@ import java.util.concurrent.Executors;
 @Component
 @Data
 public class FileServieUtil {
-    /**
-     * 日志对象
-     */
-    private final Logger logger = LoggerFactory.getLogger(FileManagementService.class);
 
     /**
      * 编码
@@ -60,7 +56,7 @@ public class FileServieUtil {
     /**
      * 文件下载地址(当前项目路径下，也可配置固定路径)
      */
-    private String downloadPath = "";
+    private String downloadPath = System.getProperty("user.dir") + "/springboot-file/download/";
 
     /**
      * 分片下载每一片大小为50M
@@ -81,7 +77,7 @@ public class FileServieUtil {
      * 上传文件
      */
     public void upload(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // 获取ServletFileUpload
+        // 获取ServletFileUpload进行上传
         ServletFileUpload servletFileUpload = getServletFileUpload();
         List<FileItem> items = servletFileUpload.parseRequest(request);
         // 获取文件信息
@@ -90,8 +86,6 @@ public class FileServieUtil {
         writeTempFile(items, uploadFileInfo);
         // 判断是否合并
         mergeFile(uploadFileInfo);
-        // 返回结果
-        logger.info("上传文件成功！");
     }
 
     /**

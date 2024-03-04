@@ -23,9 +23,10 @@ public class FileServiceAPIImpl implements FileServiceAPI {
     private final Logger logger = LoggerFactory.getLogger(FileServiceAPI.class);
 
     @Override
-    public void upload(HttpServletRequest request, HttpServletResponse response) {
+    public void upload(String fileUrl, HttpServletRequest request, HttpServletResponse response) {
         FileServieUtil fileServieUtil = new FileServieUtil();
         try {
+            fileServieUtil.setUploadPath(fileUrl);
             fileServieUtil.upload(request, response);
             logger.info("文件上传完成！");
         } catch (Exception e) {
