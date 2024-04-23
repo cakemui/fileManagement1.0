@@ -64,7 +64,7 @@ public class FileManagementController {
      */
     @PostMapping(value = "/fileUploadSharding")
     @ApiOperation(value = "大文件分片上传接口", notes = "大文件分片上传接口")
-    public ResultBean fileShardingUpload(@RequestPart("file") MultipartFile file,@RequestParam("request") HttpServletRequest request,@RequestParam("response") HttpServletResponse response){
+    public ResultBean fileShardingUpload(@RequestPart("file") MultipartFile file, HttpServletRequest request, HttpServletResponse response){
         Assert.notNull(file, "file不可为空！");
         logger.info("====================调用接口====================");
         logger.info("大文件分片上传接口：");

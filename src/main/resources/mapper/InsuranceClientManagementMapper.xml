@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.xysmartassistants.dao.system.InsuranceClientManagementDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.system.xysmartassistants.domain.entity.InsuranceClientManagement">
+        <id column="client_id" property="clientId" />
+        <result column="client_name" property="clientName" />
+        <result column="client_age" property="clientAge" />
+        <result column="client_sex" property="clientSex" />
+        <result column="client_birthday" property="clientBirthday" />
+        <result column="phone_number" property="phoneNumber" />
+        <result column="creator_id" property="creatorId" />
+        <result column="creator_account" property="creatorAccount" />
+        <result column="creator_date" property="creatorDate" />
+        <result column="editor_id" property="editorId" />
+        <result column="editor_account" property="editorAccount" />
+        <result column="editor_date" property="editorDate" />
+        <result column="is_delete" property="isDelete" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        client_id, client_name, client_age, client_sex, client_birthday, phone_number, creator_id, creator_account, creator_date, editor_id, editor_account, editor_date, is_delete
+    </sql>
+
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.xysmartassistants.dao.system.InsurancePolicyManagementDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.system.xysmartassistants.domain.entity.InsurancePolicyManagement">
+        <id column="policy_id" property="policyId" />
+        <result column="policy_number" property="policyNumber" />
+        <result column="insurance_typei" property="insuranceTypei" />
+        <result column="insured" property="insured" />
+        <result column="effective_date" property="effectiveDate" />
+        <result column="expiration_date" property="expirationDate" />
+        <result column="insured_amount" property="insuredAmount" />
+        <result column="premium" property="premium" />
+        <result column="payment_period" property="paymentPeriod" />
+        <result column="beneficiary" property="beneficiary" />
+        <result column="creator_id" property="creatorId" />
+        <result column="creator_account" property="creatorAccount" />
+        <result column="creator_date" property="creatorDate" />
+        <result column="editor_id" property="editorId" />
+        <result column="editor_account" property="editorAccount" />
+        <result column="editor_date" property="editorDate" />
+        <result column="is_delete" property="isDelete" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        policy_id, policy_number, insurance_typei, insured, effective_date, expiration_date, insured_amount, premium, payment_period, beneficiary, creator_id, creator_account, creator_date, editor_id, editor_account, editor_date, is_delete
+    </sql>
+
+</mapper>
