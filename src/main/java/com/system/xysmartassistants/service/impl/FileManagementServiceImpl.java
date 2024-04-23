@@ -32,7 +32,7 @@ import java.util.List;
 @Service("FileManagementService")
 public class FileManagementServiceImpl implements FileManagementService {
 
-    private final Logger logger = LoggerFactory.getLogger(FileManagementService.class);
+    private final Logger logger = LoggerFactory.getLogger(FileManagementServiceImpl.class);
 
     @Resource
     UserFileManagementDao userFileManagementDao;

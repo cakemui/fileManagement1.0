@@ -23,4 +23,15 @@
         user_id, user_account, user_name, user_pasword, user_type, creator_id, creator_account, creator_date, editor_id, editor_account, editor_date, is_delete
     </sql>
 
+    <select id="selectAllByUserAccountUserManagement"
+            resultType="com.system.xysmartassistants.domain.entity.UserManagement">
+        select *
+        from user_management
+        where
+        is_delete = 0
+        <if test="userAccount != null and fileId != ''">
+            and user_account = #{userAccount}
+        </if>
+    </select>
+
 </mapper>

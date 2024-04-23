@@ -77,7 +77,7 @@ public class UserInformationController {
         Assert.notNull(username, "username不可为空！");
         logger.info("====================调用接口====================");
         logger.info("获取用户信息：");
-        ResultBean resultBean = null;
+        ResultBean resultBean = userManagementService.selectUserMessage(username);
         logger.info("====================调用结束====================");
         return resultBean;
     }
@@ -94,24 +94,24 @@ public class UserInformationController {
         Assert.notNull(userManagement, "userManagement不可为空！");
         logger.info("====================调用接口====================");
         logger.info("注册新用户：");
-        ResultBean resultBean = null;
+        ResultBean resultBean = userManagementService.insert(userManagement);
         logger.info("====================调用结束====================");
         return resultBean;
     }
 
     /**
-     * 修改用户信息(包含启用/停用)
+     * 修改用户信息(包含启用/停用/删除)
      *
      * @param userManagement
      * @return
      */
     @PostMapping(value = "/editUser")
-    @ApiOperation(value = "修改用户信息(包含启用/停用)", notes = "修改用户信息(包含启用/停用)")
+    @ApiOperation(value = "修改用户信息(包含启用/停用/删除)", notes = "修改用户信息(包含启用/停用/删除)")
     public ResultBean editUser(UserManagement userManagement){
         Assert.notNull(userManagement, "userManagement不可为空！");
         logger.info("====================调用接口====================");
         logger.info("修改用户信息：");
-        ResultBean resultBean = null;
+        ResultBean resultBean = userManagementService.edit(userManagement);
         logger.info("====================调用结束====================");
         return resultBean;
     }
