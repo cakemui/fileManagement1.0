@@ -15,6 +15,6 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface InsurancePolicyManagementDao extends BaseMapper<InsurancePolicyManagement> {
 
-    Page<InsurancePolicyManagement> selectAllByPage(@Param("insurancePolicyManagement") InsurancePolicyManagement insurancePolicyManagement);
+    Page<InsurancePolicyManagement> selectAllByPage(InsurancePolicyManagement insurancePolicyManagement);
 
 }

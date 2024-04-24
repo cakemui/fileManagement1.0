@@ -79,6 +79,7 @@ public class InsurancePolicyManagementServiceImpl implements InsurancePolicyMana
         try{
             //设定初始分页
             PageHelper.startPage(policyManagement.getPage(), policyManagement.getPageSize());
+            policyManagement.setIsDelete(0);
             //封装查询结果为PageInfo类型
             Page<InsurancePolicyManagement> page = this.insurancePolicyManagementDao.selectAllByPage(policyManagement);
             PageInfo<InsurancePolicyManagement> pageInfo = new PageInfo<>(page);

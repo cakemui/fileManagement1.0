@@ -80,6 +80,7 @@ public class InsuranceClientManagementServiceImpl implements InsuranceClientMana
         try{
             //设定初始分页
             PageHelper.startPage(client.getPage(), client.getPageSize());
+            client.setIsDelete(0);
             //封装查询结果为PageInfo类型
             Page<InsuranceClientManagement> page = this.insuranceClientManagementDao.selectAllByPage(client);
             PageInfo<InsuranceClientManagement> pageInfo = new PageInfo<>(page);

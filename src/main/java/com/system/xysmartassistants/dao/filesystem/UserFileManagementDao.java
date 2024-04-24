@@ -15,7 +15,7 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface UserFileManagementDao extends BaseMapper<UserFileManagement> {
 
-    Page<UserFileManagement> selectAllByPage(@Param("userFileManagement") UserFileManagement userFileManagement);
+    Page<UserFileManagement> selectAllByPage(UserFileManagement userFileManagement);
 
     UserFileManagement selectAllByFileId(@Param("fileId")String fileId);
 }

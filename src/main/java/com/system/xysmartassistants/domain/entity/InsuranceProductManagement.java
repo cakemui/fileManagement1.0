@@ -2,6 +2,7 @@ package com.system.xysmartassistants.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.system.xysmartassistants.common.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -59,6 +60,7 @@ public class InsuranceProductManagement extends BaseEntity implements Serializab
     /**
      * 创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date creatorDate;
 
     /**
@@ -74,6 +76,7 @@ public class InsuranceProductManagement extends BaseEntity implements Serializab
     /**
      * 修改时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date editorDate;
 
     /**

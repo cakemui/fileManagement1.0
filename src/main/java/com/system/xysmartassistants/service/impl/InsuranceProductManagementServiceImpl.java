@@ -79,6 +79,7 @@ public class InsuranceProductManagementServiceImpl implements InsuranceProductMa
         try{
             //设定初始分页
             PageHelper.startPage(productManagement.getPage(), productManagement.getPageSize());
+            productManagement.setIsDelete(0);
             //封装查询结果为PageInfo类型
             Page<InsuranceProductManagement> page = this.insuranceProductManagementDao.selectAllByPage(productManagement);
             PageInfo<InsuranceProductManagement> pageInfo = new PageInfo<>(page);

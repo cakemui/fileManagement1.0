@@ -20,6 +20,6 @@ public interface UserManagementDao extends BaseMapper<UserManagement> {
      * @param userAccount
      * @return
      */
-    UserManagement selectAllByUserAccountUserManagement(@Param("userAccount") String userAccount);
+    UserManagement selectAllByUserAccountUserManagement(String userAccount);
 
 }

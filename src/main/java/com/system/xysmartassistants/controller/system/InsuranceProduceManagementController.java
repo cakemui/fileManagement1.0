@@ -6,14 +6,26 @@ import com.system.xysmartassistants.domain.entity.InsurancePolicyManagement;
 import com.system.xysmartassistants.domain.entity.InsuranceProductManagement;
 import com.system.xysmartassistants.domain.model.UserFileManagement;
 import com.system.xysmartassistants.service.InsuranceProductManagementService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
+/**
+ * 郝娜
+ *
+ * 2024年4月24日21点17分
+ * 保险产品控制层
+ */
+@RestController
+@RequestMapping("/InsuranceProduceManagementController")
+@Api(tags = "保险产品控制层", value = "InsuranceProduceManagementController")
 public class InsuranceProduceManagementController {
 
     private final Logger logger = LoggerFactory.getLogger(InsuranceProduceManagementController.class);
@@ -62,7 +74,7 @@ public class InsuranceProduceManagementController {
      * @return
      */
     @PostMapping(value = "/queryInsuranceProductByPage")
-    @ApiOperation(value = "分页查询保险产品查询接口(按销量排序)", notes = "分页查询保险产品查询接口(按销量排序)")
+    @ApiOperation(value = "分页查询保险产品查询接口", notes = "分页查询保险产品查询接口")
     public ResultBean<PageInfo<InsuranceProductManagement>> queryInsurance(InsuranceProductManagement insuranceProduct){
         Assert.notNull(insuranceProduct, "insuranceProduct不可为空！");
         logger.info("====================调用接口====================");
