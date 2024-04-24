@@ -29,7 +29,7 @@
         from user_management
         where
         is_delete = 0
-        <if test="userAccount != null and fileId != ''">
+        <if test="userAccount != null and userAccount != ''">
             and user_account = #{userAccount}
         </if>
     </select>

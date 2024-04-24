@@ -3,7 +3,10 @@ package com.system.xysmartassistants.controller.system;
 
 import com.github.pagehelper.PageInfo;
 import com.system.xysmartassistants.common.ResultBean;
+import com.system.xysmartassistants.dao.system.InsurancePolicyManagementDao;
+import com.system.xysmartassistants.domain.entity.InsurancePolicyManagement;
 import com.system.xysmartassistants.domain.model.UserFileManagement;
+import com.system.xysmartassistants.service.InsurancePolicyManagementService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -14,6 +17,8 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * 郝娜
@@ -28,21 +33,22 @@ public class InsuranceManagementController {
 
     private final Logger logger = LoggerFactory.getLogger(InsuranceManagementController.class);
 
-    // TODO: 2024/4/22 新增、修改保单接口入参为保单对象
+    @Resource
+    InsurancePolicyManagementService insurancePolicyManagementService;
 
     /**
      * 客户保险产品绑定接口(新增保单)
      *
-     * @param Policy
+     * @param policyManagement
      * @return
      */
     @PostMapping(value = "/insertPolicy")
     @ApiOperation(value = "客户保险产品绑定接口(新增保单)", notes = "客户保险产品绑定接口(新增保单)")
-    public ResultBean insertPolicy(String Policy){
-        Assert.notNull(Policy, "Policy不可为空！");
+    public ResultBean insertPolicy(InsurancePolicyManagement policyManagement){
+        Assert.notNull(policyManagement, "policyManagement不可为空！");
         logger.info("====================调用接口====================");
         logger.info("客户保险产品绑定接口：");
-        ResultBean resultBean = null;
+        ResultBean resultBean = insurancePolicyManagementService.insert(policyManagement);
         logger.info("====================调用结束====================");
         return resultBean;
     }
@@ -50,16 +56,16 @@ public class InsuranceManagementController {
     /**
      * 修改/删除保单信息接口
      *
-     * @param Policy
+     * @param policyManagement
      * @return
      */
     @PostMapping(value = "/editPolicy")
     @ApiOperation(value = "修改/删除保单信息接口", notes = "修改/删除保单信息接口")
-    public ResultBean editPolicy(String Policy){
-        Assert.notNull(Policy, "Policy不可为空！");
+    public ResultBean editPolicy(InsurancePolicyManagement policyManagement){
+        Assert.notNull(policyManagement, "policyManagement不可为空！");
         logger.info("====================调用接口====================");
         logger.info("修改/删除保单信息接口：");
-        ResultBean resultBean = null;
+        ResultBean resultBean = insurancePolicyManagementService.edit(policyManagement);
         logger.info("====================调用结束====================");
         return resultBean;
     }
@@ -67,15 +73,15 @@ public class InsuranceManagementController {
     /**
      *分页查询保单信息接口
      *
-     * @param Policy
+     * @param policyManagement
      * @return
      */
     @PostMapping(value = "/queryPoliciesByPage")
     @ApiOperation(value = "分页查询保单信息接口", notes = "分页查询保单信息接口", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResultBean<PageInfo<UserFileManagement>> queryFilesByPage(@RequestBody String Policy){
+    public ResultBean<PageInfo<InsurancePolicyManagement>> queryPoliciesByPage(@RequestBody InsurancePolicyManagement policyManagement){
         logger.info("====================调用接口====================");
-        logger.info("分页查询已上传文件接口：");
-        ResultBean resultBean = null;
+        logger.info("分页查询保单接口：");
+        ResultBean resultBean = insurancePolicyManagementService.selectClientByPage(policyManagement);
         logger.info("====================调用结束====================");
         return resultBean;
     }

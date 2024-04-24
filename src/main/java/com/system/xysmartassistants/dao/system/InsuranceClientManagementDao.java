@@ -1,7 +1,9 @@
 package com.system.xysmartassistants.dao.system;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.github.pagehelper.Page;
 import com.system.xysmartassistants.domain.entity.InsuranceClientManagement;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -12,5 +14,7 @@ import com.system.xysmartassistants.domain.entity.InsuranceClientManagement;
  * @since 2024-04-23
  */
 public interface InsuranceClientManagementDao extends BaseMapper<InsuranceClientManagement> {
+
+    Page<InsuranceClientManagement> selectAllByPage(@Param("client") InsuranceClientManagement client);
 
 }

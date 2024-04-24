@@ -35,6 +35,22 @@ public interface UserManagementService {
      * @param userName
      * @return
      */
-    ResultBean selectUserMessage (String userName);
+    ResultBean selectUserMessageAccount (String userName);
+
+    /**
+     * 用户登录服务
+     *
+     * @param userManagement
+     * @return
+     */
+    ResultBean userLogin(UserManagement userManagement);
+
+    /**
+     * 用户等出服务
+     *
+     * @param userManagement
+     * @return
+     */
+    ResultBean userLogout(UserManagement userManagement);
 
 }

@@ -27,9 +27,6 @@ public class UserInformationController {
     UserManagementService userManagementService;
 
     private final Logger logger = LoggerFactory.getLogger(UserInformationController.class);
-// TODO: 2024/4/22 2. 这里要实现基础用户的增删改查
-// TODO: 2024/4/22 3. 启用停用用户需要判断当前登录用户是否为管理员从redis中获取，若未获取到返回登录超时
-// TODO: 2024/4/22 4. 登录逻辑要将前端提交的代码进行MD5加密，并且保存在redis中并设置过期时间
 
     /**
      * 用户登录接口
@@ -43,7 +40,7 @@ public class UserInformationController {
         Assert.notNull(userManagement, "userManagement不可为空！");
         logger.info("====================调用接口====================");
         logger.info("用户登录接口：");
-        ResultBean resultBean = null;
+        ResultBean resultBean = userManagementService.userLogin(userManagement);
         logger.info("====================调用结束====================");
         return resultBean;
     }
@@ -60,24 +57,24 @@ public class UserInformationController {
         Assert.notNull(userManagement, "userManagement不可为空！");
         logger.info("====================调用接口====================");
         logger.info("用户退出接口：");
-        ResultBean resultBean = null;
+        ResultBean resultBean = userManagementService.userLogout(userManagement);
         logger.info("====================调用结束====================");
         return resultBean;
     }
 
     /**
-     * 获取用户信息(包含登录状态)
+     * 获取用户信息(包含登录状态,密码为登陆状态)
      *
      * @param username
      * @return
      */
-    @GetMapping(value = "/queryUserMessage")
-    @ApiOperation(value = "获取用户信息(包含登录状态)", notes = "获取用户信息(包含登录状态)")
-    public ResultBean queryUserMessage(String username){
+    @GetMapping(value = "/queryUserMessageByAccount")
+    @ApiOperation(value = "根据用户名获取用户信息(包含登录状态,密码为登陆状态)", notes = "根据用户名获取用户信息(包含登录状态,密码为登陆状态)")
+    public ResultBean queryUserMessageByAccount(String username){
         Assert.notNull(username, "username不可为空！");
         logger.info("====================调用接口====================");
         logger.info("获取用户信息：");
-        ResultBean resultBean = userManagementService.selectUserMessage(username);
+        ResultBean resultBean = userManagementService.selectUserMessageAccount(username);
         logger.info("====================调用结束====================");
         return resultBean;
     }

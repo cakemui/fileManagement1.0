@@ -24,4 +24,49 @@
         client_id, client_name, client_age, client_sex, client_birthday, phone_number, creator_id, creator_account, creator_date, editor_id, editor_account, editor_date, is_delete
     </sql>
 
+    <select id="selectAllByPage" resultType="com.system.xysmartassistants.domain.entity.InsuranceClientManagement">
+        select
+        client_id, client_name, client_age, client_sex, client_birthday, phone_number, creator_id, creator_account, creator_date, editor_id, editor_account, editor_date
+        from insurance_client_management
+        where
+        is_delete = 0
+        <if test="clientId != null and clientId != ''">
+            and client_id = #{clientId}
+        </if>
+        <if test="clientName != null and clientName != ''">
+            and client_name = #{clientName}
+        </if>
+        <if test="clientAge != null and clientAge != ''">
+            and client_age = #{clientAge}
+        </if>
+        <if test="clientSex != null and clientSex != ''">
+            and client_sex = #{clientSex}
+        </if>
+        <if test="clientBirthday != null and clientBirthday != ''">
+            and client_birthday = #{clientBirthday}
+        </if>
+        <if test="phoneNumber != null and phoneNumber != ''">
+            and phone_number = #{phoneNumber}
+        </if>
+
+        <if test="creatorId != null and creatorId != ''">
+            and creator_id = #{creatorId}
+        </if>
+        <if test="creatorAccount != null and creatorAccount != ''">
+            and creator_account = #{creatorAccount}
+        </if>
+        <if test="creatorDate != null and creatorDate != ''">
+            and creator_date = #{creatorDate}
+        </if>
+        <if test="editorId != null and editorId != ''">
+            and editor_id = #{editorId}
+        </if>
+        <if test="editorAccount != null and editorAccount != ''">
+            and editor_account = #{editorAccount}
+        </if>
+        <if test="editorDate != null and editorDate != ''">
+            and editor_date = #{editorDate}
+        </if>
+    </select>
+
 </mapper>

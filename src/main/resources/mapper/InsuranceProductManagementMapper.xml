@@ -22,4 +22,43 @@
         product_id, product_name, product_introduction, insurance_typei, creator_id, creator_account, creator_date, editor_id, editor_account, editor_date, is_delete
     </sql>
 
+    <select id="selectAllByPage" resultType="com.system.xysmartassistants.domain.entity.InsuranceProductManagement">
+        select
+        product_id, product_name, product_introduction, insurance_typei, creator_id, creator_account, creator_date, editor_id, editor_account, editor_date
+        from insurance_product_management
+        where
+        is_delete = 0
+        <if test="productId != null and productId != ''">
+            and product_id = #{productId}
+        </if>
+        <if test="productName != null and productName != ''">
+            and product_name = #{productName}
+        </if>
+        <if test="productIntroduction != null and productIntroduction != ''">
+            and product_introduction = #{productIntroduction}
+        </if>
+        <if test="insuranceTypei != null and insuranceTypei != ''">
+            and insurance_typei = #{insuranceTypei}
+        </if>
+
+        <if test="creatorId != null and creatorId != ''">
+            and creator_id = #{creatorId}
+        </if>
+        <if test="creatorAccount != null and creatorAccount != ''">
+            and creator_account = #{creatorAccount}
+        </if>
+        <if test="creatorDate != null and creatorDate != ''">
+            and creator_date = #{creatorDate}
+        </if>
+        <if test="editorId != null and editorId != ''">
+            and editor_id = #{editorId}
+        </if>
+        <if test="editorAccount != null and editorAccount != ''">
+            and editor_account = #{editorAccount}
+        </if>
+        <if test="editorDate != null and editorDate != ''">
+            and editor_date = #{editorDate}
+        </if>
+    </select>
+
 </mapper>

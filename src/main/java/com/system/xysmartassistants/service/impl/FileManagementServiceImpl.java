@@ -237,6 +237,7 @@ public class FileManagementServiceImpl implements FileManagementService {
             //封装查询结果为PageInfo类型
             Page<UserFileManagement> page = this.userFileManagementDao.selectAllByPage(userFileManagement);
             PageInfo<UserFileManagement> pageInfo = new PageInfo<>(page);
+            logger.info("查询成功！");
 
             //配置返回值
             resultBean.setData(pageInfo);

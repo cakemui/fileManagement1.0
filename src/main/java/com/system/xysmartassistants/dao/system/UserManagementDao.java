@@ -15,11 +15,11 @@ import org.apache.ibatis.annotations.Param;
 public interface UserManagementDao extends BaseMapper<UserManagement> {
 
     /**
-     * 通过Id查询数据
+     * 通过userAccount查询数据
      *
-     * @param id
+     * @param userAccount
      * @return
      */
-    UserManagement selectAllByUserAccountUserManagement(@Param("id") String id);
+    UserManagement selectAllByUserAccountUserManagement(@Param("userAccount") String userAccount);
 
 }

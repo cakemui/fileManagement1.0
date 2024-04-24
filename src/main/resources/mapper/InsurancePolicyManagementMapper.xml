@@ -28,4 +28,61 @@
         policy_id, policy_number, insurance_typei, insured, effective_date, expiration_date, insured_amount, premium, payment_period, beneficiary, creator_id, creator_account, creator_date, editor_id, editor_account, editor_date, is_delete
     </sql>
 
+    <select id="selectAllByPage" resultType="com.system.xysmartassistants.domain.entity.InsurancePolicyManagement">
+        select
+        policy_id, policy_number, insurance_typei, insured, effective_date, expiration_date, insured_amount, premium, payment_period, beneficiary, creator_id, creator_account, creator_date, editor_id, editor_account, editor_date
+        from insurance_policy_management
+        where
+        is_delete = 0
+        <if test="policyId != null and policyId != ''">
+            and policy_id = #{policyId}
+        </if>
+        <if test="policyNumber != null and policyNumber != ''">
+            and policy_number = #{policyNumber}
+        </if>
+        <if test="insuranceTypei != null and insuranceTypei != ''">
+            and insurance_typei = #{insuranceTypei}
+        </if>
+        <if test="insured != null and insured != ''">
+            and insured = #{insured}
+        </if>
+        <if test="effectiveDate != null and effectiveDate != ''">
+            and effective_date = #{effectiveDate}
+        </if>
+        <if test="expirationDate != null and expirationDate != ''">
+            and expiration_date = #{expirationDate}
+        </if>
+        <if test="insuredAmount != null and insuredAmount != ''">
+            and insured_amount = #{insuredAmount}
+        </if>
+        <if test="premium != null and premium != ''">
+            and premium = #{premium}
+        </if>
+        <if test="paymentPeriod != null and paymentPeriod != ''">
+            and payment_period = #{paymentPeriod}
+        </if>
+        <if test="beneficiary != null and beneficiary != ''">
+            and beneficiary = #{beneficiary}
+        </if>
+
+        <if test="creatorId != null and creatorId != ''">
+            and creator_id = #{creatorId}
+        </if>
+        <if test="creatorAccount != null and creatorAccount != ''">
+            and creator_account = #{creatorAccount}
+        </if>
+        <if test="creatorDate != null and creatorDate != ''">
+            and creator_date = #{creatorDate}
+        </if>
+        <if test="editorId != null and editorId != ''">
+            and editor_id = #{editorId}
+        </if>
+        <if test="editorAccount != null and editorAccount != ''">
+            and editor_account = #{editorAccount}
+        </if>
+        <if test="editorDate != null and editorDate != ''">
+            and editor_date = #{editorDate}
+        </if>
+    </select>
+
 </mapper>
