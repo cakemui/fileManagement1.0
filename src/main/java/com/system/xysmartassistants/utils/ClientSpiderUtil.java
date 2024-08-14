@@ -1,5 +1,6 @@
 package com.system.xysmartassistants.utils;
 
+import lombok.Data;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -8,20 +9,25 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
 /**
  * 爬虫工具类
  */
+@Component
+@Data
 public class ClientSpiderUtil {
-    //页面地址
-    public static final String clientURL = "https://www.kugou.com/?username==java";
+    private static String html = "";
+
     /**
      * 页面爬取
+     *
+     * @param clientURL 页面地址
+     * @throws IOException
      */
-    public static String html = "";
-    public static void clientSpider() throws IOException {
+    public void clientSpider(String clientURL) throws IOException {
         //1.创建HttpClient对象
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
@@ -61,10 +67,10 @@ public class ClientSpiderUtil {
      * @param html
      */
     //选择器查找元素
-    public static final String clientElements = "title";
+    private String clientElements = "title";
     //Selector选择器组合查找参数
-    public static final String clientSelector = "*";
-    public static void jsoupSpider(String html){
+    private String clientSelector = "*";
+    public void jsoupSpider(String html){
         //6.Jsoup解析html
         Document document = Jsoup.parse(html);
         System.out.println(document.getElementsByTag(clientElements).first());

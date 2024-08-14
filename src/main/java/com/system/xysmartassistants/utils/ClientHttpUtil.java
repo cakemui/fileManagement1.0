@@ -1,4 +1,5 @@
 package com.system.xysmartassistants.utils;
+import lombok.Data;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.HttpClientUtils;
@@ -28,10 +29,12 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.stereotype.Component;
 
 /**
  * ClientHttp请求工具类
  */
+@Component
 public class ClientHttpUtil {
 
     private static final int MAX_TOTAL_CONN = 600;
