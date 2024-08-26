@@ -1,12 +1,17 @@
 package com.system.xysmartassistants.utils;
 import lombok.Data;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.HttpClientUtils;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.util.EntityUtils;
 import java.io.IOException;
+import java.net.HttpCookie;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +41,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ClientHttpUtil {
+
+    //存储cookies
+    private CookieStore store;
 
     private static final int MAX_TOTAL_CONN = 600;
     private static final int MAX_CONN_PER_HOST = 300;
@@ -139,7 +147,7 @@ public class ClientHttpUtil {
      * @return String
      * @throws
      * @Title: sendPost
-     * @Description: TODO(发送post请求 ， 请求数据默认使用json格式 ， 默认使用UTF - 8编码)
+     * @Description: TODO(发送post请求 ，含json对象参数， 请求数据默认请求头 ， 默认使用UTF - 8编码)
      */
     public static String sendPost(String url, JSONObject data) {
         // 设置默认请求头
@@ -155,7 +163,7 @@ public class ClientHttpUtil {
      * @return String
      * @throws
      * @Title: sendPost
-     * @Description: TODO(发送post请求 ， 请求数据默认使用json格式 ， 默认使用UTF - 8编码)
+     * @Description: TODO(发送post请求 ，含map类型参数， 请求数据默请求头 ， 默认使用UTF - 8编码)
      */
     public static String sendPost(String url, Map<String, Object> params) {
         // 设置默认请求头
@@ -173,7 +181,7 @@ public class ClientHttpUtil {
      * @return String
      * @throws
      * @Title: sendPost
-     * @Description: TODO(发送post请求 ， 请求数据默认使用UTF - 8编码)
+     * @Description: TODO(发送post请求 ，含json对象参数， 请求数据默认使用UTF - 8编码)
      */
     public static String sendPost(String url, Map<String, String> headers, JSONObject data) {
         return sendPost(url, headers, data, encoding);
@@ -186,7 +194,7 @@ public class ClientHttpUtil {
      * @return String
      * @throws
      * @Title: sendPost
-     * @Description:(发送post请求，请求数据默认使用UTF-8编码)
+     * @Description: TODO(发送post请求，含Map类型参数，请求数据默认使用UTF-8编码)
      */
     public static String sendPost(String url, Map<String, String> headers, Map<String, String> params) {
         // 将map转成json
@@ -196,14 +204,17 @@ public class ClientHttpUtil {
 
     /**
      * @param url      请求地址
+     * @param headers  请求头
      * @param params   请求参数
+     * @param cookies  请求cookies
      * @param encoding 编码
      * @return String
      * @throws
      * @Title: sendGet
      * @Description: TODO(发送get请求)
      */
-    public static String sendGet(String url, Map<String, Object> params, String encoding) {
+    public static String sendGet(String url, Map<String, String> headers, Map<String, Object> params, Map<String, String> cookies, String encoding) {
+
         log.info("进入get请求方法...");
         log.info("请求入参：URL= " + url);
         log.info("请求入参：params=" + JSON.toJSONString(params));
@@ -214,6 +225,23 @@ public class ClientHttpUtil {
         try {
             // 创建uri
             URIBuilder builder = new URIBuilder(url);
+            // 创建cookies
+            if (cookies != null) {
+                CookieStore cookieStore = new BasicCookieStore();
+                for (Map.Entry<String, String> entry : cookies.entrySet()) {
+                    cookieStore.addCookie(new BasicClientCookie(entry.getKey(), entry.getValue()));
+                }
+            }
+            // 设置请求头
+            if (headers != null) {
+                Header[] allHeader = new BasicHeader[headers.size()];
+                int i = 0;
+                for (Map.Entry<String, String> entry : headers.entrySet()) {
+                    allHeader[i] = new BasicHeader(entry.getKey(), entry.getValue());
+                    i++;
+                }
+                httpGet.setHeaders(allHeader);
+            }
             // 封装参数
             if (params != null) {
                 for (String key : params.keySet()) {
@@ -241,10 +269,10 @@ public class ClientHttpUtil {
      * @return String
      * @throws
      * @Title: sendGet
-     * @Description: TODO(发送get请求)
+     * @Description: TODO(发送get请求，默认请求头,无cookie,含参数,默认编码)
      */
     public static String sendGet(String url, Map<String, Object> params) {
-        return sendGet(url, params, encoding);
+        return sendGet(url, null, params, null, encoding);
     }
 
     /**
@@ -252,10 +280,10 @@ public class ClientHttpUtil {
      * @return String
      * @throws
      * @Title: sendGet
-     * @Description: TODO(发送get请求)
+     * @Description: TODO(发送get请求，默认请求头,无cookie,无参数,默认编码)
      */
     public static String sendGet(String url) {
-        return sendGet(url, null, encoding);
+        return sendGet(url, null, null, null, encoding);
     }
 
     /**
